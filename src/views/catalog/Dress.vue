@@ -21,6 +21,7 @@ export default {
 </script>
 
 <template>
+  <!-- take from https://www.hyperui.dev/components/ecommerce/products -->
   <section v-if="dress">
     <div class="relative mx-auto max-w-screen-xl px-4 py-8">
       <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
