@@ -6,20 +6,33 @@ export default {
     index: { type: String, required: true, default: "" },
   },
   data() {
-    return { hiddenItems: false };
+    return {
+      hiddenItems: true,
+      currentItem: {
+        title: "",
+      },
+    };
   },
-  created() {},
+  mounted() {},
   methods: {},
   computed: {},
+  watch: {
+    items(value) {
+      if (value.length) this.currentItem = value[0];
+    },
+  },
 };
 </script>
 
 <template>
+  <!-- https://www.hyperui.dev/components/application-ui/dropdown -->
   <div class="relative" @mouseover="hiddenItems = false">
     <div
       class="inline-flex items-center overflow-hidden rounded-md border bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-700"
     >
-      <a href="#" class="px-4 py-2 text-sm leading-none"> Все категории </a>
+      <a href="#" class="px-4 py-2 text-sm leading-none">
+        {{ currentItem.title }}
+      </a>
 
       <button class="h-full p-2">
         <span class="sr-only">Menu</span>
@@ -47,7 +60,10 @@ export default {
         <a
           href="#"
           class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-          @click="change(item[this.index])"
+          @click="
+            currentItem = item;
+            change(item[this.index]);
+          "
         >
           {{ item.title }}
         </a>

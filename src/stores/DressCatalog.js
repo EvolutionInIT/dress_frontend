@@ -26,7 +26,6 @@ export const useDressCatalog = defineStore("dress-catalog", {
         });
     },
     async changeCategory(category_id) {
-      console.log(category_id);
       this.category_id = category_id;
       this.loadDressCatalog();
     },
@@ -36,7 +35,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
         .get("/category/list?per_page=100")
         .then((response) => {
           this.categories = [
-            { category_id: null, title: "Все категории" },
+            { category_id: undefined, title: "Все категории" },
             ...response.data.data,
           ];
         })
