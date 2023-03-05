@@ -52,7 +52,7 @@ export default {
     </div>
 
     <div
-      :class="{ hidden: hiddenItems }"
+      v-show="!hiddenItems"
       class="absolute right-0 z-1 mt-2 w-65 rounded-md border border-gray-100 bg-white shadow-lg"
       @mouseleave="hiddenItems = true"
     >
