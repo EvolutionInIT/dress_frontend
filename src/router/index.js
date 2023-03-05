@@ -1,10 +1,14 @@
+import { createRouter, createWebHistory } from "vue-router";
+import { nextTick } from "vue";
+
 import ListDressCatalog from "../views/catalog/ListDressCatalog.vue";
 import Dress from "../views/catalog/Dress.vue";
-import { createRouter, createWebHistory } from "vue-router";
+
 const routes = [
   {
     path: "/",
     component: ListDressCatalog,
+    meta: { title: "Прокат платьев в Алматы" },
   },
   {
     path: "/dress",
@@ -14,18 +18,17 @@ const routes = [
   },
 ];
 
+const DEFAULT_TITLE = "Прокат платьев в Алматы";
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { left: 0, top: 0 };
   },
-  beforeEach(to) {
-    if (to.meta.shouldFetch) {
-      // name `data` whatever you want
-      console.log(to.meta);
-      //to.meta.data = await fetchSomething()
-    }
+  afterEach(to) {
+    nextTick(() => {
+      document.title = to.meta.title || DEFAULT_TITLE;
+    });
   },
 });
 

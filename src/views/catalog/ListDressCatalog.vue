@@ -32,8 +32,8 @@ export default {
 <template>
   <!-- from https://tailblocks.cc/ ECOMMERCE section -->
   <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-row-reverse mb-5">
+    <div class="container px-5 py-24 <sm:py-3 mx-auto">
+      <div class="flex flex-row-reverse mb-5 <sm:mb-3">
         <DropDown
           :change="changeCategory"
           :items="categories"

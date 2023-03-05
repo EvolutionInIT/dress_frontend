@@ -46,10 +46,11 @@ export const useDressCatalog = defineStore("dress-catalog", {
 
     async getDress(params) {
       if (params)
-        await axios
+        return await axios
           .get("/v1/dress", { params: params })
           .then((response) => {
             this.dress = response.data.data;
+            return this.dress;
           })
           .catch((error) => {
             this.errors = error.response.data.errors;

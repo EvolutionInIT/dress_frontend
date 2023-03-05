@@ -9,7 +9,11 @@ export default {
     };
   },
   created() {
-    this.getDress({ dress_id: this.$route.query.dress_id || undefined });
+    this.getDress({ dress_id: this.$route.query.dress_id || undefined }).then(
+      ({ title }) => {
+        document.title = title;
+      }
+    );
   },
   methods: {
     ...mapActions(useDressCatalog, ["getDress"]),
@@ -23,20 +27,20 @@ export default {
 <template>
   <!-- take from https://www.hyperui.dev/components/ecommerce/products -->
   <section v-if="dress">
-    <div class="relative mx-auto max-w-screen-xl px-4 py-8">
-      <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-        <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
+    <div class="relative mx-auto max-w-screen-xl px-4 py-8 <sm:py-4">
+      <div class="grid grid-cols-1 items-start gap-8 <sm:gap-2 md:grid-cols-2">
+        <div class="grid gap-4 <sm:gap-2 md:grid-cols-1">
           <img
             :alt="dress.title"
             :src="dress.photo[photoSelectedIndex].image"
-            class="aspect-square w-full h-250 rounded-xl object-cover"
+            class="aspect-square w-full h-250 <sm:h-130 rounded-xl object-cover"
           />
 
-          <ul class="mt-1 flex gap-5">
+          <ul class="mt-1 flex gap-5 <sm:gap-2">
             <li v-for="(photo, key) in dress.photo" :key="key" class="h-50">
               <img
                 :src="photo.image"
-                class="aspect-square w-full h-full rounded-xl object-cover"
+                class="aspect-square w-full h-full rounded-xl object-cover cursor-pointer"
                 @click="photoSelectedIndex = key"
               />
             </li>
@@ -44,7 +48,7 @@ export default {
         </div>
 
         <div class="sticky top-0">
-          <div class="mt-8 flex justify-between">
+          <div class="mt-8 <sm:mt-2 flex justify-between">
             <div class="w-full space-y-2">
               <h1 class="text-xl font-bold sm:text-2xl">
                 {{ dress.title }}
@@ -233,10 +237,10 @@ export default {
               </p>
             </div>
 
-            <div class="mt-8 flex gap-4">
+            <div class="mt-8 <sm:mt-4 flex gap-4 <sm:justify-center">
               <button
                 type="submit"
-                class="block rounded bg-green-600 px-5 py-3 text-xs font-medium text-white hover:bg-green-500"
+                class="block rounded bg-green-600 px-5 py-3 text-white hover:bg-green-500"
               >
                 Забронировать
               </button>
