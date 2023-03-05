@@ -15,7 +15,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
   actions: {
     async loadDressCatalog() {
       await axios
-        .get("/dress/list?per_page=100", {
+        .get("/v1/dress/list?per_page=100", {
           params: { category_id: this.category_id },
         })
         .then((response) => {
@@ -32,7 +32,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
 
     async loadCategories() {
       await axios
-        .get("/category/list?per_page=100")
+        .get("/v1/category/list?per_page=100")
         .then((response) => {
           this.categories = [
             { category_id: undefined, title: "Все категории" },
@@ -47,7 +47,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
     async getDress(params) {
       if (params)
         await axios
-          .get("/dress", { params: params })
+          .get("/v1/dress", { params: params })
           .then((response) => {
             this.dress = response.data.data;
           })
