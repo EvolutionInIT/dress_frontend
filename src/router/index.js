@@ -19,6 +19,8 @@ const routes = [
 ];
 
 const DEFAULT_TITLE = "Прокат платьев в Алматы";
+document.title = DEFAULT_TITLE;
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
