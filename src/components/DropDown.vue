@@ -52,8 +52,8 @@ export default {
     </div>
 
     <div
-      class="absolute right-0 z-1 mt-2 w-65 rounded-md border border-gray-100 bg-white shadow-lg"
       :class="{ hidden: hiddenItems }"
+      class="absolute right-0 z-1 mt-2 w-65 rounded-md border border-gray-100 bg-white shadow-lg"
       @mouseleave="hiddenItems = true"
     >
       <div v-for="(item, key) in items" :key="key" class="p-2">
@@ -63,6 +63,7 @@ export default {
           @click="
             currentItem = item;
             change(item[this.index]);
+            hiddenItems = true;
           "
         >
           {{ item.title }}
