@@ -62,8 +62,8 @@ export default {
           class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           @click="
             currentItem = item;
-            change(item[this.index]);
             hiddenItems = true;
+            change(item[this.index]);
           "
         >
           {{ item.title }}
