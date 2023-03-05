@@ -56,10 +56,10 @@ export default {
       class="absolute right-0 z-1 mt-2 w-65 rounded-md border border-gray-100 bg-white shadow-lg"
       @mouseleave="hiddenItems = true"
     >
-      <div v-for="(item, key) in items" :key="key" class="p-2">
+      <div v-for="(item, key) in items" :key="key" class="p-2 <sm:py-0">
         <a
           href="#"
-          class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+          class="block rounded-lg px-4 py-2 <sm:py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           @click="
             currentItem = item;
             hiddenItems = true;
