@@ -13,7 +13,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useLangStore, ["loadLanguages", "changeLang"]),
+    ...mapActions(useLangStore, ["loadLanguages", "setLocale"]),
   },
   computed: {
     ...mapState(useLangStore, ["languages", "currentCode", "currentLang"]),
@@ -45,7 +45,7 @@ export default {
             v-if="currentLang"
             :items="languages"
             :init-item="currentLang"
-            :change="changeLang"
+            :change="setLocale"
             index="code"
           />
           <!-- <a

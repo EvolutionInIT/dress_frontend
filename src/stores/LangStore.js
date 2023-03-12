@@ -5,7 +5,7 @@ export const useLangStore = defineStore("lang-store", {
   state: () => ({
     languages: [],
     currentLang: null,
-    currentCode: import.meta.env.VITE_DEFAULT_LANG_CODE || "en",
+    currentCode: import.meta.env.VITE_DEFAULT_LOCALE_CODE || "en",
 
     errors: [],
     error: [],
@@ -31,8 +31,9 @@ export const useLangStore = defineStore("lang-store", {
           this.errors = error.response.data.errors;
         });
     },
-    async changeLang(code) {
-      this.code = code;
+    setLocale(code) {
+      if (this.i18n.locale !== code) this.i18n.locale = code;
+      if (this.currentCode !== code) this.currentCode = code;
     },
   },
 });

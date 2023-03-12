@@ -10,6 +10,7 @@ import "virtual:windi.css";
 const pinia = createPinia();
 pinia.use(({ store }) => {
   store.router = markRaw(router);
+  store.i18n = i18n.global;
 });
 
 const app = createApp(App).use(router).use(pinia).use(i18n);

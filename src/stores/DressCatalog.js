@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { useLangStore } from "./LangStore.js";
+
 import axios from "axios";
 
 export const useDressCatalog = defineStore("dress-catalog", {
@@ -14,9 +16,14 @@ export const useDressCatalog = defineStore("dress-catalog", {
   }),
   actions: {
     async loadDressCatalog() {
+      const lang = useLangStore().currentCode;
+      console.log(lang);
       await axios
         .get("/v1/dress/list?per_page=100", {
-          params: { category_id: this.category_id },
+          params: {
+            category_id: this.category_id,
+            lang,
+          },
         })
         .then((response) => {
           this.dresses = response.data.data;
@@ -31,8 +38,14 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async loadCategories() {
+      const lang = useLangStore().currentCode;
       await axios
-        .get("/v1/category/list?per_page=100")
+        .get("/v1/category/list?per_page=100", {
+          params: {
+            category_id: this.category_id,
+            lang,
+          },
+        })
         .then((response) => {
           this.categories = [
             { category_id: undefined, title: "Все категории" },
