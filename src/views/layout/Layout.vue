@@ -1,16 +1,16 @@
 <script>
-import Layout from "./views/layout/Layout.vue";
+import Header from "./Header.vue";
 
 export default {
   components: {
-    Layout,
+    Header,
   },
   data() {
     return {};
   },
 };
 </script>
-
 <template>
-  <Layout />
+  <Header />
+  <router-view />
 </template>
