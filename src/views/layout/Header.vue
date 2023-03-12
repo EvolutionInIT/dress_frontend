@@ -25,11 +25,10 @@ export default {
 </script>
 
 <template>
+  <!-- take from https://flowbite.com/blocks/marketing/header/ -->
   <header class="container px-5 py-3 <sm:py-3 mx-auto">
     <nav>
-      <div
-        class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl"
-      >
+      <div class="flex flex-wrap justify-between items-center mx-auto">
         <a href="/" class="flex items-center">
           <img
             src="../../assets/logo.svg"
