@@ -2,39 +2,34 @@
 export default {
   props: {
     items: { type: Array, default: [] },
+    initItem: { type: Object, default: null },
     change: { type: Function, required: true },
     index: { type: String, required: true, default: "" },
   },
   data() {
     return {
       hiddenItems: true,
-      currentItem: {
-        title: "",
-      },
+      currentItem:
+        this.initItem || (this.items.length ? this.items[0] : { title: "" }),
     };
   },
   mounted() {},
   methods: {},
   computed: {},
-  watch: {
-    items(value) {
-      if (value.length) this.currentItem = value[0];
-    },
-  },
 };
 </script>
 
 <template>
   <!-- https://www.hyperui.dev/components/application-ui/dropdown -->
-  <div class="relative" @mouseover="hiddenItems = false">
+  <div class="relative" @click="hiddenItems = !hiddenItems">
     <div
       class="inline-flex items-center overflow-hidden rounded-md border bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-700"
     >
-      <a href="#" class="px-4 py-2 text-sm leading-none">
+      <a href="#" class="px-4 <sm:pl-2 <sm:pr-0 py-2 text-sm leading-none">
         {{ currentItem.title }}
       </a>
 
-      <button class="h-full p-2">
+      <button class="h-full p-2 <sm:px-1">
         <span class="sr-only">Menu</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,17 +48,17 @@ export default {
 
     <div
       v-show="!hiddenItems"
-      class="absolute right-0 z-1 mt-2 w-65 rounded-md border border-gray-100 bg-white shadow-lg"
+      class="absolute right-0 z-1 mt-2 p-2 w-auto rounded-md border border-gray-100 bg-white shadow-lg"
       @mouseleave="hiddenItems = true"
     >
-      <div v-for="(item, key) in items" :key="key" class="p-2 <sm:py-0">
+      <div v-for="(item, key) in items" :key="key">
         <a
           href="#"
           class="block rounded-lg px-4 py-2 <sm:py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           @click="
-            currentItem = item;
-            hiddenItems = true;
-            change(item[this.index]);
+            this.currentItem = item;
+            this.hiddenItems = true;
+            this.change(item[this.index]);
           "
         >
           {{ item.title }}
