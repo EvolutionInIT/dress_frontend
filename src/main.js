@@ -1,9 +1,9 @@
 import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
+import i18n from "./i18n";
 import router from "./router/index";
 import axios from "axios";
-import i18n from "./i18n";
 import "virtual:windi.css";
 
 /*добавляет ссылку на роутер в каждый стор пинии*/

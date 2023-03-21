@@ -3,7 +3,10 @@ import en from "./locales/en.json";
 import ru from "./locales/ru.json";
 
 export default createI18n({
-  locale: import.meta.env.VITE_DEFAULT_LOCALE_CODE || "en",
+  locale:
+    localStorage.getItem("locale") ||
+    import.meta.env.VITE_DEFAULT_LOCALE ||
+    "en",
   fallbackLocale: "en",
   messages: {
     en,

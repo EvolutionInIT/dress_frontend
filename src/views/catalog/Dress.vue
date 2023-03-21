@@ -9,7 +9,7 @@ export default {
     };
   },
   created() {
-    this.getDress({ dress_id: this.$route.query.dress_id || undefined }).then(
+    this.getDress({ dress_id: this.$route.params.dress_id || undefined }).then(
       ({ title }) => {
         document.title = title;
       }

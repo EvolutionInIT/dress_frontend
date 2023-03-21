@@ -16,8 +16,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
   }),
   actions: {
     async loadDressCatalog() {
-      const lang = useLangStore().currentCode;
-      console.log(lang);
+      const lang = useLangStore().currentLocale;
       await axios
         .get("/v1/dress/list?per_page=100", {
           params: {
@@ -38,7 +37,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async loadCategories() {
-      const lang = useLangStore().currentCode;
+      const lang = useLangStore().currentLocale;
       await axios
         .get("/v1/category/list?per_page=100", {
           params: {
@@ -48,7 +47,10 @@ export const useDressCatalog = defineStore("dress-catalog", {
         })
         .then((response) => {
           this.categories = [
-            { category_id: undefined, title: "Все категории" },
+            {
+              category_id: undefined,
+              title: this.i18n.t("content.category_list_all_categories"),
+            },
             ...response.data.data,
           ];
         })
@@ -58,7 +60,8 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async getDress(params) {
-      if (params)
+      if (params) {
+        params.lang = useLangStore().currentLocale;
         return await axios
           .get("/v1/dress", { params: params })
           .then((response) => {
@@ -68,6 +71,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
           .catch((error) => {
             this.errors = error.response.data.errors;
           });
+      }
     },
   },
 });

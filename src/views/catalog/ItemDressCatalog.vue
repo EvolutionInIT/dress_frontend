@@ -9,7 +9,14 @@ export default {
 <template>
   <div class="group 2xl:w-1/4 xl:w-1/4 lg:w-1/3 md:w-1/2 p-4 w-full">
     <div>
-      <router-link :to="{ name: 'Dress', query: { dress_id: dress.dress_id } }">
+      <router-link
+        :to="{
+          name: 'Dress',
+          params: {
+            dress_id: dress.dress_id,
+          },
+        }"
+      >
         <a class="relative block h-128 rounded-xl overflow-hidden">
           <img
             :alt="dress.title"
