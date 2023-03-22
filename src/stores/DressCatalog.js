@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { useLangStore } from "./LangStore.js";
+
 import axios from "axios";
 
 export const useDressCatalog = defineStore("dress-catalog", {
@@ -14,9 +16,13 @@ export const useDressCatalog = defineStore("dress-catalog", {
   }),
   actions: {
     async loadDressCatalog() {
+      const lang = useLangStore().currentLocale;
       await axios
         .get("/v1/dress/list?per_page=100", {
-          params: { category_id: this.category_id },
+          params: {
+            category_id: this.category_id,
+            lang,
+          },
         })
         .then((response) => {
           this.dresses = response.data.data;
@@ -31,11 +37,20 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async loadCategories() {
+      const lang = useLangStore().currentLocale;
       await axios
-        .get("/v1/category/list?per_page=100")
+        .get("/v1/category/list?per_page=100", {
+          params: {
+            category_id: this.category_id,
+            lang,
+          },
+        })
         .then((response) => {
           this.categories = [
-            { category_id: undefined, title: "Все категории" },
+            {
+              category_id: undefined,
+              title: this.i18n.t("content.category_list_all_categories"),
+            },
             ...response.data.data,
           ];
         })
@@ -45,7 +60,8 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async getDress(params) {
-      if (params)
+      if (params) {
+        params.lang = useLangStore().currentLocale;
         return await axios
           .get("/v1/dress", { params: params })
           .then((response) => {
@@ -55,6 +71,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
           .catch((error) => {
             this.errors = error.response.data.errors;
           });
+      }
     },
   },
 });

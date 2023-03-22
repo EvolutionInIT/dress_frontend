@@ -32,7 +32,7 @@
     "validation_field_must_be_numeric": "Необходимо число",
     "validation_field_must_be_integer": "Необходимо число",
     "validation_field_uuid_invalid": "Тип поля должен быть uuid",
-    "validation_field_url_invalid": "Тип поля должен быть ссылка",
+    "validation_field_url_invalid": "Тип поля должна быть ссылка",
     "validation_field_must_be_array": "Неверный формат. Нужен массив",
     "validation_field_must_be_string": "Необходима строка",
     "validation_field_date_after": "Дата должна быть старше предыдущей",
@@ -43,7 +43,7 @@
     "validation_field_alpha_dash_invalid": "Разрешены только буквы, цифры и подчеркивания"
   },
   "content": {
-    "common_title": "Dress rent",
-    "category_list_all_categories": "All categories"
+    "common_title": "Көйлек жалға беру",
+    "category_list_all_categories": "Барлық санаттар"
   }
 }

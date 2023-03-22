@@ -41,5 +41,9 @@
     "validation_field_date_format_invalid_m/Y": "Некорректный формат даты мм/гггг",
     "validation_field_date_invalid": "Неверный формат даты",
     "validation_field_alpha_dash_invalid": "Разрешены только буквы, цифры и подчеркивания"
+  },
+  "content": {
+    "common_title": "Прокат платьев",
+    "category_list_all_categories": "Все категории"
   }
 }
