@@ -9,8 +9,10 @@ export const useDressCatalog = defineStore("dress-catalog", {
     dress: null,
 
     categories: [],
-    category_id: undefined,
-
+    category: {
+      category_id: undefined,
+      title: "",
+    },
     errors: [],
     error: [],
   }),
@@ -31,8 +33,8 @@ export const useDressCatalog = defineStore("dress-catalog", {
           this.errors = error.response.data.errors;
         });
     },
-    async changeCategory(category_id) {
-      this.category_id = category_id;
+    async changeCategory(item) {
+      this.category = item;
       this.loadDressCatalog();
     },
 
@@ -41,19 +43,22 @@ export const useDressCatalog = defineStore("dress-catalog", {
       await axios
         .get("/v1/client/rent/category/list?per_page=100", {
           params: {
-            category_id: this.category_id,
+            category_id: this.category.category_id,
             lang,
           },
         })
         .then((response) => {
+          const categories = [
+            {
+              category_id: undefined,
+              title: this.i18n.t("content.category_list_all_categories"),
+            },
+            ...response.data.data,
+          ];
+
           this.$patch({
-            categories: [
-              {
-                category_id: undefined,
-                title: this.i18n.t("content.category_list_all_categories"),
-              },
-              ...response.data.data,
-            ],
+            categories,
+            category: categories[0],
           });
         })
         .catch((error) => {

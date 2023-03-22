@@ -15,6 +15,7 @@ export default {
   },
   watch: {
     initItem(value) {
+      console.log(value);
       this.currentItem = value;
     },
   },
@@ -62,7 +63,7 @@ export default {
               e.stopPropagation();
               this.currentItem = item;
               this.hiddenItems = true;
-              this.change(item[this.index]);
+              this.change(item);
             }
           "
         >
