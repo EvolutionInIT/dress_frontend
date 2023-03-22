@@ -22,7 +22,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
       await axios
         .get("/v1/client/rent/dress/list?per_page=100", {
           params: {
-            category_id: this.category_id,
+            category_id: this.category.category_id,
             lang,
           },
         })

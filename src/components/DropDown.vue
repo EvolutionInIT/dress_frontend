@@ -29,7 +29,7 @@ export default {
       class="inline-flex items-center overflow-hidden rounded-md border bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-700"
     >
       <a href="#" class="px-4 <sm:pl-2 <sm:pr-0 py-2 text-sm leading-none">
-        {{ currentItem.title }}
+        {{ currentItem.title.replace(" ", "&nbsp;") }}
       </a>
 
       <button class="h-full p-2 <sm:px-1">
@@ -67,7 +67,7 @@ export default {
             }
           "
         >
-          {{ item.title }}
+          {{ item.title.replace(" ", "&nbsp;") }}
         </a>
       </div>
     </div>
