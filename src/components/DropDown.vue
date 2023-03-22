@@ -15,7 +15,6 @@ export default {
   },
   watch: {
     initItem(value) {
-      console.log(value);
       this.currentItem = value;
     },
   },
