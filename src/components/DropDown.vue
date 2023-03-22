@@ -13,9 +13,11 @@ export default {
         this.initItem || (this.items.length ? this.items[0] : { title: "" }),
     };
   },
-  mounted() {},
-  methods: {},
-  computed: {},
+  watch: {
+    initItem(value) {
+      this.currentItem = value;
+    },
+  },
 };
 </script>
 
@@ -56,9 +58,12 @@ export default {
           href="#"
           class="block rounded-lg px-4 py-2 <sm:py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           @click="
-            this.currentItem = item;
-            this.hiddenItems = true;
-            this.change(item[this.index]);
+            (e) => {
+              e.stopPropagation();
+              this.currentItem = item;
+              this.hiddenItems = true;
+              this.change(item[this.index]);
+            }
           "
         >
           {{ item.title }}

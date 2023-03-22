@@ -18,7 +18,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
     async loadDressCatalog() {
       const lang = useLangStore().currentLocale;
       await axios
-        .get("/v1/dress/list?per_page=100", {
+        .get("/v1/client/rent/dress/list?per_page=100", {
           params: {
             category_id: this.category_id,
             lang,
@@ -39,20 +39,22 @@ export const useDressCatalog = defineStore("dress-catalog", {
     async loadCategories() {
       const lang = useLangStore().currentLocale;
       await axios
-        .get("/v1/category/list?per_page=100", {
+        .get("/v1/client/rent/category/list?per_page=100", {
           params: {
             category_id: this.category_id,
             lang,
           },
         })
         .then((response) => {
-          this.categories = [
-            {
-              category_id: undefined,
-              title: this.i18n.t("content.category_list_all_categories"),
-            },
-            ...response.data.data,
-          ];
+          this.$patch({
+            categories: [
+              {
+                category_id: undefined,
+                title: this.i18n.t("content.category_list_all_categories"),
+              },
+              ...response.data.data,
+            ],
+          });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -63,7 +65,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
       if (params) {
         params.lang = useLangStore().currentLocale;
         return await axios
-          .get("/v1/dress", { params: params })
+          .get("/v1/client/rent/dress", { params: params })
           .then((response) => {
             this.dress = response.data.data;
             return this.dress;

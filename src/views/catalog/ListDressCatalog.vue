@@ -20,7 +20,7 @@ export default {
     ]),
   },
   computed: {
-    ...mapState(useDressCatalog, ["dresses", "categories"]),
+    ...mapState(useDressCatalog, ["dresses", "categories", "category_id"]),
   },
   created() {
     this.loadDressCatalog();
@@ -36,7 +36,7 @@ export default {
       <div class="flex flex-row-reverse mb-5 <sm:mb-3">
         <DropDown
           v-if="categories.length"
-          :init-item="categories[0]"
+          :init-item="category_id ? categories[category_id] : undefined"
           :items="categories"
           :change="changeCategory"
           index="category_id"
