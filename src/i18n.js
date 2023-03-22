@@ -1,5 +1,6 @@
 import { createI18n } from "vue-i18n";
 import en from "./locales/en.json";
+import kk from "./locales/kk.json";
 import ru from "./locales/ru.json";
 
 export default createI18n({
@@ -10,6 +11,7 @@ export default createI18n({
   fallbackLocale: "en",
   messages: {
     en,
+    kk,
     ru,
   },
 });
