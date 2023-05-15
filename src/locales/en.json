@@ -44,6 +44,7 @@
   },
   "content": {
     "common_title": "Dress rent",
-    "category_list_all_categories": "All categories"
+    "category_list_all_categories": "All categories",
+    "common_currency": "Dollar"
   }
 }

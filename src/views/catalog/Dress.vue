@@ -2,6 +2,7 @@
 import { useDressCatalog } from "../../stores/DressCatalog";
 import { mapActions, mapState } from "pinia";
 
+
 export default {
   data() {
     return {
@@ -224,16 +225,16 @@ export default {
             <div class="mt-8 flex gap-4">
               <p class="text-lg">Цена:</p>
               <p class="text-lg">
-                ₸{{
-                  dress.price
-                    .toLocaleString("kk", {
-                      style: "currency",
-                      currency: "KZT",
-                      minimumFractionDigits: Math.ceil(dress.price % 1) * 2,
-                    })
-                    .replace(" ", ",")
-                }}
-                / сутки
+<!--                ₸{{-->
+<!--                  dress.price-->
+<!--                    .toLocaleString("kk", {-->
+<!--                      style: "currency",-->
+<!--                      currency: "KZT",-->
+<!--                      minimumFractionDigits: Math.ceil(dress.price % 1) * 2,-->
+<!--                    })-->
+<!--                    .replace(" ", ",")-->
+<!--                }}-->
+<!--                / сутки-->
               </p>
             </div>
 
