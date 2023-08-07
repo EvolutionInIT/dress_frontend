@@ -9,8 +9,10 @@ export const useDressCatalog = defineStore("dress-catalog", {
     dress: null,
 
     categories: [],
-    category_id: undefined,
-
+    category: {
+      category_id: undefined,
+      title: "",
+    },
     errors: [],
     error: [],
   }),
@@ -18,9 +20,9 @@ export const useDressCatalog = defineStore("dress-catalog", {
     async loadDressCatalog() {
       const lang = useLangStore().currentLocale;
       await axios
-        .get("/v1/dress/list?per_page=100", {
+        .get("/v1/client/rent/dress/list?per_page=100", {
           params: {
-            category_id: this.category_id,
+            category_id: this.category.category_id,
             lang,
           },
         })
@@ -31,28 +33,38 @@ export const useDressCatalog = defineStore("dress-catalog", {
           this.errors = error.response.data.errors;
         });
     },
-    async changeCategory(category_id) {
-      this.category_id = category_id;
+
+    async changeCategory(item) {
+      this.category = item;
       this.loadDressCatalog();
+    },
+
+    async changeDate(date) {
+      console.log("xx", date);
     },
 
     async loadCategories() {
       const lang = useLangStore().currentLocale;
       await axios
-        .get("/v1/category/list?per_page=100", {
+        .get("/v1/client/rent/category/list?per_page=100", {
           params: {
-            category_id: this.category_id,
+            category_id: this.category.category_id,
             lang,
           },
         })
         .then((response) => {
-          this.categories = [
+          const categories = [
             {
               category_id: undefined,
-              title: this.i18n.t("content.category_list_all_categories"),
+              title: this.i18n.t("rent.category_list_all_categories"),
             },
             ...response.data.data,
           ];
+
+          this.$patch({
+            categories,
+            category: categories[0],
+          });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -63,7 +75,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
       if (params) {
         params.lang = useLangStore().currentLocale;
         return await axios
-          .get("/v1/dress", { params: params })
+          .get("/v1/client/rent/dress", { params: params })
           .then((response) => {
             this.dress = response.data.data;
             return this.dress;

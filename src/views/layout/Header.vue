@@ -16,7 +16,7 @@ export default {
     ...mapActions(useLangStore, ["loadLanguages", "setLocale"]),
   },
   computed: {
-    ...mapState(useLangStore, ["languages", "currentCode", "currentLang"]),
+    ...mapState(useLangStore, ["languages", "currentLang"]),
   },
   created() {
     this.loadLanguages();

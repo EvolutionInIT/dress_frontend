@@ -9,7 +9,6 @@ export const useLangStore = defineStore("lang-store", {
       localStorage.getItem("local") ||
       import.meta.env.VITE_DEFAULT_LOCALE ||
       "en",
-
     errors: [],
     error: [],
   }),
@@ -18,10 +17,10 @@ export const useLangStore = defineStore("lang-store", {
       await axios
         .get("/v1/language/list")
         .then((response) => {
-          let languages = response.data.data;
+          const languages = response.data.data;
           if (languages.length)
             languages.find((currentLang) => {
-              if (currentLang.code === this.currentLocale) {
+              if (currentLang.locale === this.currentLocale) {
                 this.$patch({
                   currentLang,
                   languages,
@@ -34,11 +33,11 @@ export const useLangStore = defineStore("lang-store", {
           this.errors = error.response.data.errors;
         });
     },
-    setLocale(locale, redirect = true) {
-      if (this.i18n.locale !== locale) this.i18n.locale = locale;
-      if (this.currentLocale !== locale) this.currentLocale = locale;
-      localStorage.setItem("locale", locale);
-      if (redirect) this.router.push({ params: { locale } });
+    setLocale(lang, redirect = true) {
+      localStorage.setItem("locale", lang.locale);
+      if (redirect) this.router.push({ params: { locale: lang.locale } });
+      if (this.i18n.locale !== lang.locale) this.i18n.locale = lang.locale;
+      if (this.currentLocale !== lang.locale) this.currentLocale = lang.locale;
     },
   },
 });
