@@ -33,9 +33,14 @@ export const useDressCatalog = defineStore("dress-catalog", {
           this.errors = error.response.data.errors;
         });
     },
+
     async changeCategory(item) {
       this.category = item;
       this.loadDressCatalog();
+    },
+
+    async changeDate(date) {
+      console.log("xx", date);
     },
 
     async loadCategories() {
@@ -51,7 +56,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
           const categories = [
             {
               category_id: undefined,
-              title: this.i18n.t("content.category_list_all_categories"),
+              title: this.i18n.t("rent.category_list_all_categories"),
             },
             ...response.data.data,
           ];
