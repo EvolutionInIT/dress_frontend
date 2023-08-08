@@ -73,7 +73,7 @@ export default {
           </div>
 
           <form class="mt-4">
-            <fieldset class="flex">
+            <fieldset class="flex" v-if="dress.color.length">
               <legend class="mb-1 text-sm font-medium contents">
                 {{ $i18n.t("rent.dress_color") }}:&nbsp;
               </legend>
@@ -96,7 +96,7 @@ export default {
               </label>
             </fieldset>
 
-            <fieldset class="mt-4 flex">
+            <fieldset v-if="dress.size.length" class="mt-4 flex">
               <legend class="text-sm font-medium contents">
                 {{ $i18n.t("rent.dress_size") }}:
               </legend>
@@ -113,7 +113,7 @@ export default {
                 />
 
                 <span
-                  class="group inline-flex h-6 w-16 items-center justify-center rounded-md border text-xs peer-checked:bg-black peer-checked:text-white"
+                  class="group inline-flex h-6 w-auto pr-2 pl-2 items-center justify-center rounded-md border text-xs peer-checked:bg-black peer-checked:text-white"
                 >
                   {{ size.size }}
                 </span>
