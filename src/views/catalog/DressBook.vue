@@ -114,6 +114,7 @@ export default {
         no-input
         as-single
         v-model="date"
+        :disable-date="getBusyDates"
         :formatter="{ date: 'YYYY-MM-DD', month: 'MMM' }"
         :i18n="$i18n.locale"
       />
