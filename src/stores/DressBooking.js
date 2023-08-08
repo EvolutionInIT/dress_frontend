@@ -31,14 +31,11 @@ export const useDressBooking = defineStore("dress-booking", {
         });
     },
     getBusyDates(date) {
-      console.log("date", date);
-      console.log("new Date", new Date(date + " UTC"));
-      const d = new Date(date + " UTC").toISOString().slice(0, 10);
-      console.log("d", d);
+      const d = date.toISOString().slice(0, 10);
 
       return (
         date < new Date(+new Date() - 1000 * 60 * 60 * 24 * 1) ||
-        date > new Date(+new Date() + 1000 * 60 * 60 * 24 * 14) ||
+        date > new Date(+new Date() + 1000 * 60 * 60 * 24 * 13) ||
         this.bookings.find(
           (item) => item.date === d && item.booking[0].free < 1
         )
