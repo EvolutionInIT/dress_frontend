@@ -31,7 +31,7 @@ export const useDressBooking = defineStore("dress-booking", {
         });
     },
     getBusyDates(date) {
-      const d = date.toISOString().slice(0, 10);
+      const d = date.toLocaleDateString("en-CA");
 
       return (
         date < new Date(+new Date() - 1000 * 60 * 60 * 24 * 1) ||
@@ -51,7 +51,7 @@ export const useDressBooking = defineStore("dress-booking", {
         .post("/v1/client/rent/booking/save", {
           ...this.form,
           date: this.date
-            ? new Date(this.date + " UTC").toISOString().slice(0, 10)
+            ? new Date(this.date).toLocaleDateString("en-CA")
             : "",
         })
         .then((response) => {
