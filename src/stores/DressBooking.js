@@ -31,7 +31,10 @@ export const useDressBooking = defineStore("dress-booking", {
         });
     },
     getBusyDates(date) {
+      console.log("date", date);
+      console.log("new Date", new Date(date + " UTC"));
       const d = new Date(date + " UTC").toISOString().slice(0, 10);
+      console.log("d", d);
 
       return (
         date < new Date(+new Date() - 1000 * 60 * 60 * 24 * 1) ||
