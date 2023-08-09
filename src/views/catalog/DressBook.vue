@@ -39,6 +39,7 @@ export default {
       "success",
       "errors",
       "booking",
+      "datepikerKey",
     ]),
     ...mapWritableState(useDressBooking, ["date"]),
   },
@@ -111,6 +112,7 @@ export default {
       <FormErrors :error="errors.date" />
       <VueTailwindDatepicker
         v-if="bookings.length"
+        :key="datepikerKey"
         no-input
         as-single
         v-model="date"
@@ -134,7 +136,7 @@ export default {
         />
       </div>
 
-      <FormErrors :error="errors.dress_booking_enter_email" />
+      <FormErrors :error="errors.phone_number" />
       <div class="mb-2">
         <input
           v-model="form.phone_number"
