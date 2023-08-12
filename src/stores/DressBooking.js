@@ -15,6 +15,7 @@ export const useDressBooking = defineStore("dress-booking", {
     success: null,
     errors: [],
     error: [],
+    datepikerKey: 0,
   }),
   actions: {
     async getAwaylableDressDates(dress_id) {
@@ -64,6 +65,18 @@ export const useDressBooking = defineStore("dress-booking", {
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+          if (
+            this.errors.quantity.includes(
+              "dress_booking_save_dress_quantity_less_then_needed"
+            )
+          ) {
+            this.getAwaylableDressDates(this.form.dress_id).then(() => {
+              this.$patch({
+                datepikerKey: this.datepikerKey++,
+                date: "",
+              });
+            });
+          }
         });
     },
   },

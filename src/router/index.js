@@ -16,7 +16,7 @@ const routes = [
       {
         path: "",
         component: ListDressCatalog,
-        meta: { title: "rent.common_title" },
+        meta: { title: "content.common_title" },
       },
       {
         path: "dress/:dress_id",
