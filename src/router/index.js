@@ -51,6 +51,15 @@ const router = createRouter({
   // },
 });
 
+// router.beforeEach((to, from, next) => {
+//     if (to.params?.locale) {
+//         if (to.params.locale !== useLangStore().currentLocale)
+//             useLangStore().setLocale({locale: to.params.locale}, false);
+//         if (to.meta?.title) document.title = i18n.global.t(to.meta.title);
+//     }
+//     next();
+// });
+
 router.beforeEach((to, from, next) => {
   if (to.params?.locale) {
     if (to.params.locale !== useLangStore().currentLocale)

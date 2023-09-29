@@ -45,7 +45,8 @@
     "dress_booking_save_dress_quantity_less_then_needed": "Недостаточно свободного товара для бронирования"
   },
   "content": {
-    "common_title": "Dress rent"
+    "common_title": "Dress rent",
+    "common_currency": "Dollar"
   },
   "rent": {
     "category_list_all_categories": "All categories",

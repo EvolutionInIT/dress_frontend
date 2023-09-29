@@ -45,7 +45,8 @@
     "dress_booking_save_dress_quantity_less_then_needed": "Недостаточно свободного товара для бронирования"
   },
   "content": {
-    "common_title": "Көйлек жалға беру"
+    "common_title": "Көйлек жалға беру",
+    "common_currency": "Доллар"
   },
   "rent": {
     "category_list_all_categories": "Барлық санаттар",

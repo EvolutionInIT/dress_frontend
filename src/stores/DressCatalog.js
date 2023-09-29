@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useLangStore } from "./LangStore.js";
+import { useCurrencyStore } from "./CurrencyStore.js";
 
 import axios from "axios";
 
@@ -19,11 +20,14 @@ export const useDressCatalog = defineStore("dress-catalog", {
   actions: {
     async loadDressCatalog() {
       const lang = useLangStore().currentLocale;
+      const currency = useCurrencyStore().currentCode;
+      //const currencySymbol = useCurrencyStore().currentSymbol;
       await axios
         .get("/v1/client/rent/dress/list?per_page=100", {
           params: {
             category_id: this.category.category_id,
             lang,
+            currency,
           },
         })
         .then((response) => {
@@ -40,7 +44,7 @@ export const useDressCatalog = defineStore("dress-catalog", {
     },
 
     async changeDate(date) {
-      console.log("xx", date);
+      //console.log("xx", date);
     },
 
     async loadCategories() {
@@ -74,6 +78,8 @@ export const useDressCatalog = defineStore("dress-catalog", {
     async getDress(params) {
       if (params) {
         params.lang = useLangStore().currentLocale;
+        params.currency = useCurrencyStore().currentCode;
+        //params.symbol = useCurrencyStore().currentSymbol;
         return await axios
           .get("/v1/client/rent/dress", { params: params })
           .then((response) => {
