@@ -1,9 +1,12 @@
 <script>
 import { useDressCatalog } from "../../stores/DressCatalog";
+import DressBook from "./DressBook.vue";
 import { mapActions, mapState } from "pinia";
 
-
 export default {
+  components: {
+    DressBook,
+  },
   data() {
     return {
       photoSelectedIndex: 0,
@@ -17,7 +20,7 @@ export default {
     );
   },
   methods: {
-    ...mapActions(useDressCatalog, ["getDress"]),
+    ...mapActions(useDressCatalog, ["getDress", "saveBooking"]),
   },
   computed: {
     ...mapState(useDressCatalog, ["dress"]),
@@ -69,182 +72,75 @@ export default {
             </div>
           </div>
 
-          <form class="mt-8">
-            <fieldset>
-              <legend class="mb-1 text-sm font-medium">Цвет:</legend>
-              <div class="mt-2 flex flex-wrap gap-1">
-                <label for="color_green" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    id="color_green"
-                    name="color"
-                    class="peer sr-only"
-                    checked
-                  />
+          <form class="mt-4">
+            <fieldset class="flex" v-if="dress.color.length">
+              <legend class="mb-1 text-sm font-medium contents">
+                {{ $i18n.t("rent.dress_color") }}:&nbsp;
+              </legend>
+              <label
+                v-for="color in dress.color"
+                :for="'color_' + color.color"
+                class="cursor-pointer ml-1"
+              >
+                <input
+                  type="radio"
+                  :id="'color_' + color.color"
+                  name="color"
+                  class="peer sr-only"
+                />
 
-                  <span
-                    class="block h-6 w-6 rounded-full border border-gray-200 bg-green-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-                  ></span>
-                </label>
-
-                <label for="color_blue" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    id="color_blue"
-                    name="color"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="block h-6 w-6 rounded-full border border-gray-200 bg-blue-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-                  ></span>
-                </label>
-
-                <label for="color_pink" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    id="color_pink"
-                    name="color"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="block h-6 w-6 rounded-full border border-gray-200 bg-pink-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-                  ></span>
-                </label>
-
-                <label for="color_red" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    id="color_red"
-                    name="color"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="block h-6 w-6 rounded-full border border-gray-200 bg-red-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-                  ></span>
-                </label>
-
-                <label for="color_indigo" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    id="color_indigo"
-                    name="color"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="block h-6 w-6 rounded-full border border-gray-200 bg-indigo-700 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
-                  ></span>
-                </label>
-              </div>
+                <span
+                  class="block h-6 w-6 rounded-full border border-gray-200 ring-1 ring-transparent ring-offset-1 peer-checked:ring-gray-300"
+                  :style="'background-color: ' + color.color"
+                />
+              </label>
             </fieldset>
 
-            <fieldset class="mt-4">
-              <legend class="mb-1 text-sm font-medium">Размер:</legend>
+            <fieldset v-if="dress.size.length" class="mt-4 flex">
+              <legend class="text-sm font-medium contents">
+                {{ $i18n.t("rent.dress_size") }}:
+              </legend>
+              <label
+                v-for="size in dress.size"
+                :for="'size_' + size.size"
+                class="cursor-pointer ml-2"
+              >
+                <input
+                  type="radio"
+                  name="size"
+                  :id="'size_' + size.size"
+                  class="peer sr-only"
+                />
 
-              <div class="flex flex-wrap gap-1">
-                <label for="size_xs" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="size"
-                    id="size_xs"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white"
-                  >
-                    XS
-                  </span>
-                </label>
-
-                <label for="size_s" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="size"
-                    id="size_s"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white"
-                  >
-                    S
-                  </span>
-                </label>
-
-                <label for="size_m" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="size"
-                    id="size_m"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white"
-                  >
-                    M
-                  </span>
-                </label>
-
-                <label for="size_l" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="size"
-                    id="size_l"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white"
-                  >
-                    L
-                  </span>
-                </label>
-
-                <label for="size_xl" class="cursor-pointer">
-                  <input
-                    type="radio"
-                    name="size"
-                    id="size_xl"
-                    class="peer sr-only"
-                  />
-
-                  <span
-                    class="group inline-flex h-8 w-8 items-center justify-center rounded-full border text-xs font-medium peer-checked:bg-black peer-checked:text-white"
-                  >
-                    XL
-                  </span>
-                </label>
-              </div>
+                <span
+                  class="group inline-flex h-6 w-auto pr-2 pl-2 items-center justify-center rounded-md border text-xs peer-checked:bg-black peer-checked:text-white"
+                >
+                  {{ size.size }}
+                </span>
+              </label>
             </fieldset>
 
-            <div class="mt-8 flex gap-4">
-              <p class="text-lg">Цена:</p>
-              <p class="text-lg">
-<!--                ₸{{-->
-<!--                  dress.price-->
-<!--                    .toLocaleString("kk", {-->
-<!--                      style: "currency",-->
-<!--                      currency: "KZT",-->
-<!--                      minimumFractionDigits: Math.ceil(dress.price % 1) * 2,-->
-<!--                    })-->
-<!--                    .replace(" ", ",")-->
-<!--                }}-->
-<!--                / сутки-->
+            <div class="mt-4 flex gap-2">
+              <p class="text-sm font-medium">
+                {{ $i18n.t("rent.dress_price") }}:
+              </p>
+              <p class="text-sm">
+                ₸{{
+                  dress.price
+                    .toLocaleString("kk", {
+                      style: "currency",
+                      currency: "KZT",
+                      minimumFractionDigits: Math.ceil(dress.price % 1) * 2,
+                    })
+                    .replace(" ", ",")
+                }}
+                / {{ $i18n.t("rent.dress_price_in_day") }}
               </p>
             </div>
 
-            <div class="mt-8 <sm:mt-4 flex gap-4 <sm:justify-center">
-              <button
-                type="submit"
-                class="block rounded bg-green-600 px-5 py-3 text-white hover:bg-green-500"
-              >
-                Забронировать
-              </button>
+            <div v-if="dress">
+              <hr class="mt-3 mb-3" />
+              <DressBook :dress_id="dress.dress_id" />
             </div>
           </form>
         </div>

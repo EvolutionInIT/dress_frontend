@@ -13,9 +13,11 @@ export default {
         this.initItem || (this.items.length ? this.items[0] : { title: "" }),
     };
   },
-  mounted() {},
-  methods: {},
-  computed: {},
+  watch: {
+    initItem(value) {
+      this.currentItem = value;
+    },
+  },
 };
 </script>
 
@@ -26,7 +28,7 @@ export default {
       class="inline-flex items-center overflow-hidden rounded-md border bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-700"
     >
       <a href="#" class="px-4 <sm:pl-2 <sm:pr-0 py-2 text-sm leading-none">
-        {{ currentItem.title }}
+        {{ currentItem.title.replace(" ", "&nbsp;") }}
       </a>
 
       <button class="h-full p-2 <sm:px-1">
@@ -56,12 +58,15 @@ export default {
           href="#"
           class="block rounded-lg px-4 py-2 <sm:py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
           @click="
-            this.currentItem = item;
-            this.hiddenItems = true;
-            this.change(item[this.index]);
+            (e) => {
+              e.stopPropagation();
+              this.currentItem = item;
+              this.hiddenItems = true;
+              this.change(item);
+            }
           "
         >
-          {{ item.title }}
+          {{ item.title.replace(" ", "&nbsp;") }}
         </a>
       </div>
     </div>

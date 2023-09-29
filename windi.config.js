@@ -3,6 +3,13 @@ import colors from "windicss/colors";
 
 export default defineConfig({
   darkMode: "class", // or 'media'
+  extract: {
+    include: [
+      "src/**/*.{vue,html,jsx,tsx}",
+      "./node_modules/vue-tailwind-datepicker/**/*.js",
+    ],
+    exclude: [".git"],
+  },
   theme: {
     extend: {
       screens: {
@@ -16,6 +23,8 @@ export default defineConfig({
         blue: colors.sky,
         red: colors.rose,
         pink: colors.fuchsia,
+        "vtd-primary": colors.sky,
+        "vtd-secondary": colors.gray,
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],

@@ -40,11 +40,33 @@
     "validation_field_date_before_now": "Дата должна быть меньше, чем текущее время",
     "validation_field_date_format_invalid_m/Y": "Некорректный формат даты мм/гггг",
     "validation_field_date_invalid": "Неверный формат даты",
-    "validation_field_alpha_dash_invalid": "Разрешены только буквы, цифры и подчеркивания"
+    "validation_field_alpha_dash_invalid": "Разрешены только буквы, цифры и подчеркивания",
+
+    "dress_booking_save_dress_quantity_less_then_needed": "Недостаточно свободного товара для бронирования"
   },
   "content": {
     "common_title": "Dress rent",
-    "category_list_all_categories": "All categories",
     "common_currency": "Dollar"
+  },
+  "rent": {
+    "category_list_all_categories": "All categories",
+    "dress_catalog_filter_date": "Rental date",
+    "dress_catalog_datepicker_close": "Close",
+
+    "dress_color": "Color",
+    "dress_size": "Size",
+    "dress_price": "Prise",
+    "dress_price_in_day": "24 hours",
+
+    "dress_booking_form_title": "Для бронирования выберите дату и заполните форму ниже",
+    "dress_booking_quantity": "Количество",
+    "dress_booking_quantity_available": "доступно",
+    "dress_booking_quantity_select_date": "выберите дату ниже",
+    "dress_booking_enter_email": "введите email",
+    "dress_booking_enter_phone_number": "введите мобильный телефон без +",
+    "dress_booking_button_title": "Book",
+    "dress_booking_save_success": "Товар успешно заброванирован на указанную дату.",
+    "dress_booking_save_success_send_to_messenger": "Для ускорения процесса бронирования скиньте пожалуйста информацию о нем к нам в месенджер, нажав на кнопку ниже",
+    "dress_booking_save_success_send_to_messenger_button": "Отправить информацию в мессенджер"
   }
 }
