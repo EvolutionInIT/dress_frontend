@@ -1,11 +1,14 @@
 <script>
-
-import {  mapState } from "pinia";
-import {useCurrencyStore} from "../../stores/CurrencyStore.js";
+import { mapState } from "pinia";
+import { useCurrencyStore } from "../../stores/CurrencyStore.js";
+import VLazyImage from "v-lazy-image";
 
 export default {
+  components: {
+    VLazyImage,
+  },
   props: {
-    dress: {type: Object, default: {}},
+    dress: { type: Object, default: {} },
   },
   computed: {
     ...mapState(useCurrencyStore, ["currentCurrency"]),
@@ -17,7 +20,7 @@ export default {
   <div class="group 2xl:w-1/4 xl:w-1/4 lg:w-1/3 md:w-1/2 p-4 w-full">
     <div>
       <router-link
-          :to="{
+        :to="{
           name: 'Dress',
           params: {
             dress_id: dress.dress_id,
@@ -25,10 +28,11 @@ export default {
         }"
       >
         <a class="relative block h-128 rounded-xl overflow-hidden">
-          <img
-              :alt="dress.title"
-              class="group-hover:scale-110 transform duration-1000 object-cover w-full h-full"
-              :src="dress?.photo[0]?.image || ''"
+          <v-lazy-image
+            class="group-hover:scale-110 transform duration-1000 object-cover w-full h-full"
+            src-placeholder="../../src/assets/placeholder.gif"
+            :src="dress?.photo[0]?.image || ''"
+            :alt="dress.title"
           />
         </a>
         <div class="mt-4">
@@ -39,16 +43,15 @@ export default {
             {{ dress.title }}
           </h2>
           <p class="mt-1">
-            <!--            ₸-->
-            {{ currentCurrency ? currentCurrency.symbol : '' }}
+            {{ currentCurrency ? currentCurrency.symbol : "" }}
             {{
               dress.price
-                  .toLocaleString("kk", {
-                    //style: "currency",
-                    //currency: currencyCode,
-                    minimumFractionDigits: Math.ceil(dress.price % 1) * 2,
-                  })
-                  .replace(" ", ",")
+                .toLocaleString("kk", {
+                  //style: "currency",
+                  //currency: currencyCode,
+                  minimumFractionDigits: Math.ceil(dress.price % 1) * 2,
+                })
+                .replace(" ", ",")
             }}
           </p>
         </div>

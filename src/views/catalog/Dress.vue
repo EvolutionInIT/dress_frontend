@@ -2,10 +2,12 @@
 import { useDressCatalog } from "../../stores/DressCatalog";
 import DressBook from "./DressBook.vue";
 import { mapActions, mapState } from "pinia";
+import VLazyImage from "v-lazy-image";
 
 export default {
   components: {
     DressBook,
+    VLazyImage,
   },
   data() {
     return {
@@ -34,16 +36,17 @@ export default {
     <div class="relative mx-auto max-w-screen-xl px-4 py-8 <sm:py-4">
       <div class="grid grid-cols-1 items-start gap-8 <sm:gap-2 md:grid-cols-2">
         <div class="grid gap-4 <sm:gap-2 md:grid-cols-1">
-          <img
-            :alt="dress.title"
-            :src="dress.photo[photoSelectedIndex].image"
+          <v-lazy-image
             class="aspect-square w-full h-250 <sm:h-130 rounded-xl object-cover"
+            src-placeholder="../../src/assets/placeholder.gif"
+            :src="dress.photo[photoSelectedIndex].image"
+            :alt="dress.title"
           />
-
           <ul class="mt-1 flex gap-5 <sm:gap-2">
             <li v-for="(photo, key) in dress.photo" :key="key" class="h-50">
-              <img
+              <v-lazy-image
                 :src="photo.image"
+                src-placeholder="../../src/assets/placeholder.gif"
                 class="aspect-square w-full h-full rounded-xl object-cover cursor-pointer"
                 @click="photoSelectedIndex = key"
               />
