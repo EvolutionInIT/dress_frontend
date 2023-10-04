@@ -45,8 +45,7 @@
     "dress_booking_save_dress_quantity_less_then_needed": "Недостаточно свободного товара для бронирования"
   },
   "content": {
-    "common_title": "Прокат платьев",
-    "common_currency": "Доллар"
+    "common_title": "Прокат платьев"
   },
   "rent": {
     "category_list_all_categories": "Все категории",
